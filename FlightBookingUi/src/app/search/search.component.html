@@ -1,0 +1,33 @@
+<div class="search-container">
+  <h2>✈️ Search Flights</h2>
+  <form (ngSubmit)="searchFlights()" class="search-form">
+    <input type="text" [(ngModel)]="origin" name="origin" placeholder="Enter Origin" required>
+    <input type="text" [(ngModel)]="destination" name="destination" placeholder="Enter Destination" required>
+    <button type="submit">🔍 Search</button>
+  </form>
+
+  <!-- Show results if flights are found -->
+  <div *ngIf="flights.length > 0" class="results">
+    <h3>✅ Available Flights</h3>
+    <div class="flights-grid">
+      <div *ngFor="let flight of flights" class="flight-card">
+        <div class="flight-header">
+          <span class="flight-number">#{{ flight.flightNumber }}</span>
+          <span class="flight-price">₹{{ flight.price }}</span>
+        </div>
+        <div class="flight-route">
+          <strong>{{ flight.origin }}</strong> ➡️ <strong>{{ flight.destination }}</strong>
+        </div>
+        <div class="flight-times">
+          <span>🕒 Departure: {{ flight.departureTime }}</span>
+          <span>🛬 Arrival: {{ flight.arrivalTime }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Show message if no flights found -->
+  <div *ngIf="flights.length === 0 && origin && destination" class="no-results">
+    <p>❌ No flights found for the selected route.</p>
+  </div>
+</div>
